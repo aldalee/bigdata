@@ -1,5 +1,6 @@
 package com.msb.wc;
 
+import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.typeinfo.Types;
@@ -16,6 +17,8 @@ public class JStreamWordCount {
     public static void main(String[] args) throws Exception {
         //准备Flink实时处理环境
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        //DataStream Batch Mode
+        env.setRuntimeMode(RuntimeExecutionMode.BATCH);
         //实时读取数据
         //TODO:如何处理'readTextFile(java.lang.String)' is deprecated
         DataStreamSource<String> ds = env.readTextFile("./data/words.txt");

@@ -1,5 +1,6 @@
 package com.msb.wc
 
+import org.apache.flink.api.common.RuntimeExecutionMode
 import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
 
 /**
@@ -9,6 +10,8 @@ object StreamWordCount {
     def main(args: Array[String]): Unit = {
         //准备实时处理环境
         val env = StreamExecutionEnvironment.getExecutionEnvironment
+        //DataStream Batch Mode
+        env.setRuntimeMode(RuntimeExecutionMode.BATCH)
         //导入隐式转换
         import org.apache.flink.streaming.api.scala._
         //读取实时数据
